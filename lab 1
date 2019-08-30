@@ -1,0 +1,74 @@
+def loadCsv(filename):
+lines = csv.reader(open(filename, "r"));
+dataset = list(lines)
+headers = dataset.pop(0)
+return dataset, headers
+def print_hypothesis(h):
+print('<',end=' ')
+for i in range(0,len(h)-1):
+print(h[i],end=',')
+print('>')
+def findS():
+dataset,features=loadCsv('data11_sports6.csv')
+rows=len(dataset);
+cols=len(dataset[0]);
+flag = 0
+for x in range(0,rows):
+t=dataset[x]
+# Initialize h with first +ve sample
+if t[-1]=='1' and flag==0:
+flag=1
+h = dataset[x]
+# Update h with remaining +ve samples
+elif t[-1]=='1':
+for y in range(cols):
+if h[y]!=t[y]:
+h[y]='?'
+#print("Training instance {0} the hypothesis is : ".format(x+1),end=' ')
+#print_hypothesis(h)
+print("The maximally specific hypothesis for a given training examples")
+#print(h)
+print_hypothesis(h)
+findS()
+
+ 
+ 
+ 
+ RESULTS & CONCLUSIONS:
+
+Result-1
+Dataset: data11_tennis6.csv
+
+Sky,AirTemp,Humidity,Wind,EnjoySport
+sunny,warm,normal,strong,warm,same,1
+sunny,warm,high,strong,warm,same,1
+rainy,cold,high,strong,warm,change,0
+sunny,warm,high,strong,cool,change,1
+
+
+
+
+Output:
+
+The Maximally Specific Hypothesis for a given Training Examples
+< sunny,warm,?,strong,?,?,>
+
+
+
+Result-2
+
+Dataset: data12_tennis4.csv
+Sky,AirTemp,Humidity,Wind,EnjoySport
+sunny,hot,high,weak,1
+sunny,hot,high,strong,1
+overcast,hot,high,weak,1
+rain,mild,high,weak,0
+rain,cool,normal,weak,1
+rain,cool,normal,strong,0
+overcast,cool,normal,strong,1
+sunny,cool,normal,weak,1
+rain,mild,normal,weak,1
+
+Output
+The Maximally Specific Hypothesis for a given Training Examples
+< ?,?,?,?,>
